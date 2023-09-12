@@ -4,14 +4,11 @@ import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
-import org.testng.annotations.Test;
 
 import java.util.concurrent.TimeUnit;
 
-import static org.testng.Assert.fail;
-
-public class UntitledTestCase {
-    private WebDriver wd;
+public class TestBase {
+    protected WebDriver wd;
     private JavascriptExecutor js;
 
     @BeforeClass(alwaysRun = true)
@@ -35,25 +32,15 @@ public class UntitledTestCase {
         wd.findElement(By.xpath("//input[@value='Login']")).click();
     }
 
-    @Test
-    public void testUntitledTestCase() throws Exception {
-        gotoGroupPage();
-        initGroupCreation();
-        fillGroupForm(new GroupData("test1", "test2", "test3"));
-        submitGroupCreation();
-        returnToGroupPage();
-        wd.findElement(By.linkText("Logout")).click();
-    }
-
-    private void returnToGroupPage() {
+    protected void returnToGroupPage() {
         wd.findElement(By.linkText("group page")).click();
     }
 
-    private void submitGroupCreation() {
+    protected void submitGroupCreation() {
         wd.findElement(By.name("submit")).click();
     }
 
-    private void fillGroupForm(GroupData groupData) {
+    protected void fillGroupForm(GroupData groupData) {
         wd.findElement(By.name("group_name")).click();
         wd.findElement(By.name("group_name")).clear();
         wd.findElement(By.name("group_name")).sendKeys(groupData.name());
@@ -65,11 +52,11 @@ public class UntitledTestCase {
         wd.findElement(By.name("group_footer")).sendKeys(groupData.footer());
     }
 
-    private void initGroupCreation() {
+    protected void initGroupCreation() {
         wd.findElement(By.name("new")).click();
     }
 
-    private void gotoGroupPage() {
+    protected void gotoGroupPage() {
         wd.findElement(By.linkText("groups")).click();
     }
 
@@ -94,5 +81,13 @@ public class UntitledTestCase {
         } catch (NoAlertPresentException e) {
             return false;
         }
+    }
+
+    protected void deletSelectedGroups() {
+      wd.findElement(By.name("delete")).click();
+    }
+
+    protected void selectGroup() {
+      wd.findElement(By.name("selected[]")).click();
     }
 }
