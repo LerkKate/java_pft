@@ -8,11 +8,11 @@ public class CroupCreationTests extends TestBase {
 
     @Test
     public void testUntitledTestCase() throws Exception {
-        app.gotoGroupPage();
-        app.initGroupCreation();
-        app.fillGroupForm(new GroupData("test1", "test2", "test3"));
-        app.submitGroupCreation();
-        app.returnToGroupPage();
+        app.getNavigationHelper().gotoGroupPage();
+        app.getGroupHelper().initGroupCreation();
+        app.getGroupHelper().fillGroupForm(new GroupData("test1", "test2", "test3"));
+        app.getGroupHelper().submitGroupCreation();
+        app.getGroupHelper().returnToGroupPage();
         app.wd.findElement(By.linkText("Logout")).click();
     }
 

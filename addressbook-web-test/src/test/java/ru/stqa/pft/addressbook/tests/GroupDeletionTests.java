@@ -7,11 +7,11 @@ public class GroupDeletionTests extends TestBase{
   
   @Test
   public void testGroupDeletion() throws Exception {
-    app.gotoGroupPage();
+    app.getNavigationHelper().gotoGroupPage();
     app.wd.get("http://localhost/addressbook/group.php");
-    app.selectGroup();
-    app.deletSelectedGroups();
-    app.returnToGroupPage();
+    app.getGroupHelper().selectGroup();
+    app.getGroupHelper().deletSelectedGroups();
+    app.getGroupHelper().returnToGroupPage();
     app.wd.findElement(By.linkText("Logout")).click();
   }
 
